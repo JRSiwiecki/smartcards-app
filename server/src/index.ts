@@ -19,7 +19,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.post("/decks", async (req: Request, res: Response) => {
     const newDeck = new Deck({
-        title: "Java Deck"
+        title: req.body.title
     });
 
     const createdDeck = await newDeck.save();
