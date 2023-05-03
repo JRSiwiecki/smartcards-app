@@ -5,14 +5,14 @@ function App() {
 
   const [title, setTitle] = useState("");
 
-  function createNewDeck(e: React.FormEvent)
+  async function createNewDeck(e: React.FormEvent)
   {
     
     // Prevent refreshing on submit
     e.preventDefault(); 
     
     // Send data to DB
-    fetch("http://localhost:3000/decks", {
+    await fetch("http://localhost:3000/decks", {
       method: "POST",
       body: JSON.stringify({
         title,
@@ -21,6 +21,10 @@ function App() {
         "Content-Type": "application/json",
       },
     });
+
+    // Clear title input after a new deck is created
+    setTitle("");
+
   }
 
   return (
