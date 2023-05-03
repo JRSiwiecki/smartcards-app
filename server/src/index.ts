@@ -16,9 +16,6 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("Welcome to Smartcards!");
-});
 
 app.post("/decks", async (req: Request, res: Response) => {
     const newDeck = new Deck({
