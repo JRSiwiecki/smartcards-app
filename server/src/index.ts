@@ -1,7 +1,8 @@
 // Module Imports
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
-require("dotenv").config();
+import { config } from "dotenv";
+config();
 
 // Model Imports
 import Deck from "./models/Deck";
@@ -26,9 +27,7 @@ app.post("/decks", async (req: Request, res: Response) => {
     res.json(createdDeck);
 });
 
-mongoose.connect(
-    "mongodb+srv://jrsiwiecki:" + process.env.DB_PASSWORD + "@smartcards.eeafzig.mongodb.net/?retryWrites=true&w=majority"
-    )
+mongoose.connect(process.env.MONGODB_URL!)
     .then( () => {
         console.log(`Started on port ${PORT}`);
         app.listen(PORT);
