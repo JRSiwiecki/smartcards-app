@@ -33,6 +33,13 @@ function App() {
 
   }
 
+  async function handleDeleteDeck(deckId: string)
+  {
+    await fetch("http://localhost:3000/decks/" + deckId, {
+      method: "DELETE"
+    });
+  }
+
   // useEffect allows you to synchronize a component with an
   // external system
   useEffect( () => {
@@ -53,7 +60,9 @@ function App() {
         <ul className="decks">
           {
             decks.map( (deck) => (
-              <li key={deck._id}>{deck.title}</li>
+              <li key={deck._id}>{deck.title}
+                <button onClick={ () => handleDeleteDeck(deck._id)}>X</button>
+              </li>
             ))
           }
         </ul>
