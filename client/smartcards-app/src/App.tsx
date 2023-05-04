@@ -18,7 +18,7 @@ function App() {
     e.preventDefault(); 
     
     // Send data to DB
-    await fetch("http://localhost:3000/decks", {
+    const response = await fetch("http://localhost:3000/decks", {
       method: "POST",
       body: JSON.stringify({
         title,
@@ -28,6 +28,11 @@ function App() {
       },
     });
 
+    const deck = await response.json();
+    
+    // Get old array and append new deck
+    setDecks([...decks, deck]);
+    
     // Clear title input after a new deck is created
     setTitle("");
 
@@ -35,9 +40,13 @@ function App() {
 
   async function handleDeleteDeck(deckId: string)
   {
-    await fetch("http://localhost:3000/decks/" + deckId, {
+    await fetch(`http://localhost:3000/decks/${deckId}`, {
       method: "DELETE"
     });
+
+    // Remove deck from UI if it is the one we just deleted from the DB
+    setDecks(decks.filter(deck => deck._id !== deckId));
+
   }
 
   // useEffect allows you to synchronize a component with an
