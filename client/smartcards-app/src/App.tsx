@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './App.css'
 
 function App() {
 
+  const [decks, setDecks] = useState([]);
   const [title, setTitle] = useState("");
 
   async function createNewDeck(e: React.FormEvent)
@@ -26,6 +27,20 @@ function App() {
     setTitle("");
 
   }
+
+  // useEffect allows you to synchronize a component with an
+  // external system
+  useEffect( () => {
+    
+    async function fetchDecks() {
+      
+      const response = await fetch("http://localhost:3000/decks");
+      const newDecks = await response.json();
+      setDecks(newDecks);
+    }
+    
+    fetchDecks();
+  }, []);
 
   return (
       <div className="App">
