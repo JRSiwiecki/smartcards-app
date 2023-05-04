@@ -44,6 +44,15 @@ function App() {
 
   return (
       <div className="App">
+
+        <ul className="decks">
+          {
+            decks.map( (deck) => (
+              <li key={deck._id}>{deck.title}</li>
+            ))
+          }
+        </ul>
+
         <form onSubmit={createNewDeck}>
           <label htmlFor="deck-title">Deck Title</label>
           <input id="deck-title" type="text" value={title}
