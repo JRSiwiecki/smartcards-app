@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
-
-type TDeck = {
-  _id: string;
-  title: string;
-};
+import { deleteDeck } from "./api/deleteDeck";
+import { TDeck, getDecks } from "./api/getDecks";
+import { createDeck } from "./api/createDeck";
 
 function App() {
   const [decks, setDecks] = useState<TDeck[]>([]);
@@ -15,18 +13,7 @@ function App() {
     // Prevent refreshing on submit
     e.preventDefault();
 
-    // Send data to DB
-    const response = await fetch("http://localhost:3000/decks", {
-      method: "POST",
-      body: JSON.stringify({
-        title,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const deck = await response.json();
+    const deck = await createDeck(title);
 
     // Get old array and append new deck
     setDecks([...decks, deck]);
@@ -36,10 +23,7 @@ function App() {
   }
 
   async function handleDeleteDeck(deckId: string) {
-    await fetch(`http://localhost:3000/decks/${deckId}`, {
-      method: "DELETE",
-    });
-
+    deleteDeck(deckId);
     // Remove deck from UI if it is the one we just deleted from the DB
     setDecks(decks.filter((deck) => deck._id !== deckId));
   }
@@ -48,8 +32,7 @@ function App() {
   // external system
   useEffect(() => {
     async function fetchDecks() {
-      const response = await fetch("http://localhost:3000/decks");
-      const newDecks = await response.json();
+      const newDecks = await getDecks();
       setDecks(newDecks);
     }
 
@@ -60,12 +43,10 @@ function App() {
     <div className="App">
       <ul className="decks">
         {decks.map((deck) => (
-          <Link to={`decks/${deck._id}`}>
-            <li key={deck._id}>
-              {deck.title}
-              <button onClick={() => handleDeleteDeck(deck._id)}>X</button>
-            </li>
-          </Link>
+          <li key={deck._id}>
+            <Link to={`decks/${deck._id}`}>{deck.title}</Link>
+            <button onClick={() => handleDeleteDeck(deck._id)}>X</button>
+          </li>
         ))}
       </ul>
 
