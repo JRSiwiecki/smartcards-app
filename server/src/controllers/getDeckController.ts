@@ -4,8 +4,9 @@ import { Request, Response } from "express";
 // Model Imports
 import Deck from "../models/Deck";
 
-export async function getDecksController(req: Request, res: Response) {
+export async function getDeckController(req: Request, res: Response) {
   // .find() gets all data from collection
-  const decks = await Deck.find();
-  res.json(decks);
+  const { deckId } = req.params;
+  const deck = await Deck.findById(deckId);
+  res.json(deck);
 }

@@ -8,10 +8,11 @@ import { config } from "dotenv";
 import Deck from "./models/Deck";
 
 // Controller Imports
-import { getDecksController } from "./controllers/getDeckController";
+import { getDecksController } from "./controllers/getDecksController";
 import { createDecksController } from "./controllers/createDeckController";
 import { deleteDecksController } from "./controllers/deleteDeckController";
 import { createCardForDeckController } from "./controllers/createCardForDeckController";
+import { getDeckController } from "./controllers/getDeckController";
 
 // App Boilerplate
 const app = express();
@@ -28,6 +29,7 @@ app.post("/decks", createDecksController);
 app.delete("/decks/:deckId", deleteDecksController);
 
 // Card Routes
+app.get("/decks/:deckId", getDeckController);
 app.post("/decks/:deckId/cards", createCardForDeckController);
 
 // Mongoose Connection
