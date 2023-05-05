@@ -1,0 +1,14 @@
+.Header {
+  background-color: white;
+  height: 80px;
+  margin: 20px;
+}
+
+.Header .Header-container {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  align-items: center;
+}
