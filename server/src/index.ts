@@ -17,31 +17,27 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/decks", async (req: Request, res: Response) => {
-    
-    // .find() gets all data from collection
-    const decks = await Deck.find();
-    res.json(decks);
+  // .find() gets all data from collection
+  const decks = await Deck.find();
+  res.json(decks);
 });
 
 app.post("/decks", async (req: Request, res: Response) => {
-    const newDeck = new Deck({
-        title: req.body.title
-    });
+  const newDeck = new Deck({
+    title: req.body.title,
+  });
 
-    const createdDeck = await newDeck.save();
-    res.json(createdDeck);
+  const createdDeck = await newDeck.save();
+  res.json(createdDeck);
 });
 
 app.delete("/decks/:deckId", async (req: Request, res: Response) => {
-    
-    const deckId = req.params.deckId;
-    const deletedDeck = await Deck.findByIdAndDelete(deckId);
-    res.json(deletedDeck);
+  const deckId = req.params.deckId;
+  const deletedDeck = await Deck.findByIdAndDelete(deckId);
+  res.json(deletedDeck);
 });
 
-mongoose.connect(process.env.MONGODB_URL!)
-    .then( () => {
-        console.log(`Started on port ${PORT}`);
-        app.listen(PORT);
-    });
-
+mongoose.connect(process.env.MONGODB_URL!).then(() => {
+  console.log(`Started on port ${PORT}`);
+  app.listen(PORT);
+});

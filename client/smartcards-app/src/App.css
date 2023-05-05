@@ -28,7 +28,7 @@
 
 .decks li {
   position: relative;
-  background-color:slateblue;
+  background-color: slateblue;
   border: 1px solid white;
   border-radius: 10%;
   display: flex;
@@ -39,7 +39,7 @@
 }
 
 .decks li:hover {
-  background-color:rgb(148, 134, 229);
+  background-color: rgb(148, 134, 229);
   cursor: pointer;
 }
 
@@ -48,4 +48,8 @@
   font-size: 10px;
   top: 5px;
   right: 5px;
+}
+
+.decks a li {
+  color: white;
 }
