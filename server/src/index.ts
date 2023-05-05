@@ -11,6 +11,7 @@ import Deck from "./models/Deck";
 import { getDecksController } from "./controllers/getDeckController";
 import { createDecksController } from "./controllers/createDeckController";
 import { deleteDecksController } from "./controllers/deleteDeckController";
+import { createCardForDeckController } from "./controllers/createCardForDeckController";
 
 // App Boilerplate
 const app = express();
@@ -21,12 +22,13 @@ app.use(cors());
 app.use(express.json());
 config();
 
-// Routes
+// Deck Routes
 app.get("/decks", getDecksController);
-
 app.post("/decks", createDecksController);
-
 app.delete("/decks/:deckId", deleteDecksController);
+
+// Card Routes
+app.post("/decks/:deckId/cards", createCardForDeckController);
 
 // Mongoose Connection
 mongoose.connect(process.env.MONGODB_URL!).then(() => {
