@@ -11,10 +11,6 @@ export default function Header() {
         <div>
           <a href="/">Decks</a>
         </div>
-
-        <div>
-          <a href="/login">Login</a>
-        </div>
       </div>
     </div>
   );
