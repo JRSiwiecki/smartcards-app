@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "../css/App.css";
 import { Link } from "react-router-dom";
-import { deleteDeck } from "./api/deleteDeck";
-import { TDeck, getDecks } from "./api/getDecks";
-import { createDeck } from "./api/createDeck";
+import { deleteDeck } from "../api/deleteDeck";
+import { TDeck, getDecks } from "../api/getDecks";
+import { createDeck } from "../api/createDeck";
 
 function App() {
   const [decks, setDecks] = useState<TDeck[]>([]);

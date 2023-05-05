@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App.tsx";
-import "./index.css";
-import Deck from "./Deck.tsx";
-import Header from "./Header.tsx";
+import App from "./components/App.tsx";
+import "./css/index.css";
+import Deck from "./components/Deck.tsx";
+import Header from "./components/Header.tsx";
 
 const router = createBrowserRouter([
   {
