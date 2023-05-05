@@ -23,7 +23,7 @@ function App() {
   }
 
   async function handleDeleteDeck(deckId: string) {
-    deleteDeck(deckId);
+    await deleteDeck(deckId);
     // Remove deck from UI if it is the one we just deleted from the DB
     setDecks(decks.filter((deck) => deck._id !== deckId));
   }

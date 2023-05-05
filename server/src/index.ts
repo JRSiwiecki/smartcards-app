@@ -13,6 +13,7 @@ import { createDecksController } from "./controllers/createDeckController";
 import { deleteDecksController } from "./controllers/deleteDeckController";
 import { createCardForDeckController } from "./controllers/createCardForDeckController";
 import { getDeckController } from "./controllers/getDeckController";
+import { deleteCardOnDeckController } from "./controllers/deleteCardOnDeckController";
 
 // App Boilerplate
 const app = express();
@@ -31,6 +32,7 @@ app.delete("/decks/:deckId", deleteDecksController);
 // Card Routes
 app.get("/decks/:deckId", getDeckController);
 app.post("/decks/:deckId/cards", createCardForDeckController);
+app.delete("/decks/:deckId/cards/:index", deleteCardOnDeckController);
 
 // Mongoose Connection
 mongoose.connect(process.env.MONGODB_URL!).then(() => {

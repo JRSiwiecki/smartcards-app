@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { TDeck } from "./api/getDecks";
 import { createCard } from "./api/createCard";
 import { getDeck } from "./api/getDeck";
+import { deleteCard } from "./api/deleteCard";
 
 export default function Deck() {
   const [deck, setDeck] = useState<TDeck | undefined>();
@@ -12,23 +13,23 @@ export default function Deck() {
   const { deckId } = useParams();
 
   async function handleCreateCard(e: React.FormEvent) {
-    // Prevent refreshing on submit
     e.preventDefault();
     const { cards: serverCards } = await createCard(deckId!, text);
     setCards(serverCards);
 
-    // Clear title input after a new deck is created
     setText("");
   }
 
-  // async function handleDeleteDeck(deckId: string) {
-  //   deleteDeck(deckId);
-  //   // Remove deck from UI if it is the one we just deleted from the DB
-  //   setDecks(decks.filter((deck) => deck._id !== deckId));
-  // }
+  async function handleDeleteCard(index: number) {
+    if (!deckId) {
+      return;
+    }
 
-  // useEffect allows you to synchronize a component with an
-  // external system
+    const newDeck = await deleteCard(deckId, index);
+
+    setCards(newDeck.cards);
+  }
+
   useEffect(() => {
     async function fetchDeck() {
       if (!deckId) {
@@ -45,10 +46,10 @@ export default function Deck() {
 
   return (
     <div className="App">
-      <ul className="cards">
-        {cards.map((card) => (
-          <li key={card}>
-            {/* <button onClick={() => handleDeleteDeck(deck._id)}>X</button> */}
+      <ul className="decks">
+        {cards.map((card, index) => (
+          <li key={index}>
+            <button onClick={() => handleDeleteCard(index)}>X</button>
             {card}
           </li>
         ))}
